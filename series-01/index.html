@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series Detail | 作品详情</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #0a0a0a; --text-color: #ffffff; }
+        body { background-color: var(--bg-color); color: var(--text-color); margin: 0; font-family: 'Inter', sans-serif; }
+
+        /* 固定在左上角的返回按钮 */
+        .back-nav {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+        }
+        .back-nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+        }
+        .back-nav a:hover { color: #fff; }
+
+        /* 顶部标题区 */
+        header {
+            padding: 120px 5vw 60px;
+            text-align: center;
+        }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic; letter-spacing: 3px; margin: 0; }
+        .description { color: #666; font-size: 0.9rem; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+        /* 纯展示瀑布流 */
+        .gallery-container { padding: 0 5vw 100px; }
+        .photo-list {
+            column-count: 2; /* 详情页建议2列，让照片更大更清晰 */
+            column-gap: 20px;
+        }
+        .photo-item {
+            margin-bottom: 20px;
+            break-inside: avoid;
+        }
+        .photo-item img {
+            width: 100%;
+            display: block;
+            filter: brightness(0.9);
+            transition: filter 0.5s;
+        }
+        .photo-item img:hover { filter: brightness(1); }
+
+        @media (max-width: 768px) {
+            .photo-list { column-count: 1; }
+            header { padding-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="back-nav">
+        <a href="../index.html">← Back to Portfolio</a>
+    </nav>
+
+    <header>
+        <h1>SEA & REEF</h1>
+        <p class="description">
+            这是我对海洋与礁石的长期观察项目。
+            通过黑白影调探索自然界中抽象的几何线条。
+        </p>
+    </header>
+
+    <div class="gallery-container">
+        <div class="photo-list">
+            <div class="photo-item"><img src="01.jpg"></div>
+            <div class="photo-item"><img src="02.jpg"></div>
+            <div class="photo-item"><img src="03.jpg"></div>
+            <div class="photo-item"><img src="04.jpg"></div>
+        </div>
+    </div>
+
+</body>
+</html>
