@@ -5,119 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        :root {
-            --bg-color: #0a0a0a; /* 极深黑，增加沉浸感 */
-            --text-color: #ffffff;
-            --accent-color: #d4af37; /* 金色点缀 */
-        }
+        :root { --bg-color: #0a0a0a; --text-color: #ffffff; }
+        body { background-color: var(--bg-color); color: var(--text-color); margin: 0; font-family: 'Inter', sans-serif; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
+        /* --- 顶部全屏大图轮播 --- */
+        .hero-swiper {
+            width: 100%;
+            height: 100vh;
         }
+        .swiper-slide {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+            pointer-events: none; /* 让点击穿透到背景的链接上 */
+        }
+        .hero-link {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+        }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-style: italic; letter-spacing: 4px; margin: 0; }
 
-        /* 动态导航栏 */
-        header {
-            height: 100vh; /* 首页全屏 */
+        /* --- 底部作品集入口网格 --- */
+        .container { padding: 80px 5vw; }
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 25px; 
+        }
+        .portfolio-entry {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            aspect-ratio: 3/2;
+            cursor: pointer;
+        }
+        .portfolio-entry img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        /* 封面信息遮罩 */
+        .entry-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('your-cover-photo.jpg'); /* 这里可以放一张封面图 */
-            background-size: cover;
-            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
+        .portfolio-entry:hover img { transform: scale(1.1); }
+        .portfolio-entry:hover .entry-overlay { opacity: 1; }
+        .entry-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; letter-spacing: 2px; }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-style: italic;
-            margin: 0;
-            letter-spacing: 4px;
-            animation: fadeInUp 1.5s ease;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            color: #888;
-            margin-top: 20px;
-        }
-
-        /* 照片网格 - 瀑布流布局 */
-        .container {
-            padding: 100px 5vw;
-        }
-
-        .gallery {
-            column-count: 3; /* 三栏布局 */
-            column-gap: 20px;
-        }
-
-        .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px; /* 微圆角更精致 */
-        }
-
-        .gallery-item img {
-            width: 100%;
-            display: block;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: grayscale(20%); /* 淡淡的灰度增加艺术感 */
-        }
-
-        /* 悬浮交互：照片变亮并轻微放大 */
-        .gallery-item:hover img {
-            transform: scale(1.03);
-            filter: grayscale(0%);
-        }
-
-        /* 进场动画 */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 响应式：手机端自动变一栏 */
-        @media (max-width: 900px) {
-            .gallery { column-count: 2; }
-            h1 { font-size: 2.5rem; }
-        }
-        @media (max-width: 600px) {
-            .gallery { column-count: 1; }
-        }
+        /* 移动端适配 */
+        @media (max-width: 600px) { h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>The Moment</h1>
-    <div class="subtitle">Personal Photography Archive</div>
-</header>
+<div class="swiper hero-swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url('cover1.jpg');">
+            <a href="series-01/index.html" class="hero-link"></a>
+            <div class="hero-content"><h1>Sea & Reef</h1><p>View Collection</p></div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('cover2.jpg');">
+            <a href="series-02/index.html" class="hero-link"></a>
+            <div class="hero-content"><h1>Urban Abstract</h1><p>In Progress</p></div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
 
 <div class="container">
     <div class="gallery">
-        <div class="gallery-item"><img src="7.JPG"></div>
-        <div class="gallery-item"><img src="8.JPG"></div>
-        <div class="gallery-item"><img src="photo3.jpg"></div>
-        <div class="gallery-item"><img src="photo4.jpg"></div>
-        <div class="gallery-item"><img src="photo5.jpg"></div>
-        <div class="gallery-item"><img src="photo6.jpg"></div>
-    </div>
+        <a href="series-01/index.html" class="portfolio-entry">
+            <img src="cover1.jpg">
+            <div class="entry-overlay"><div class="entry-title">SEA & REEF</div></div>
+        </a>
+        
+        <a href="series-02/index.html" class="portfolio-entry">
+            <img src="cover2.jpg">
+            <div class="entry-overlay"><div class="entry-title">UNFINISHED</div></div>
+        </a>
+        
+        </div>
 </div>
 
-<footer style="padding: 100px; text-align: center; color: #444; font-size: 0.8rem; letter-spacing: 2px;">
-    &copy; 2026 YOUR NAME. ALL RIGHTS RESERVED.
-</footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.hero-swiper', {
+        loop: true,
+        autoplay: { delay: 5000 }, // 5秒换一张
+        pagination: { el: '.swiper-pagination', clickable: true },
+        effect: 'fade', // 淡入淡出转场，更具电影感
+        fadeEffect: { crossFade: true }
+    });
+</script>
 
 </body>
 </html>
